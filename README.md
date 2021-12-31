@@ -23,6 +23,24 @@ cd mac-deploy
 ansible-galaxy install -r requirements.yml
 ```
 
+## Create ansible.cfg and inventory as example
+
+`ansible.cfg`
+
+```
+[defaults]
+nocows                = True
+inventory             = inventory
+deprecation_warnings  = False
+host_key_checking     = False
+```
+
+`inventory`
+
+```
+localhost ansible_connection=local
+```
+
 ## Run the playbook
 
 #### Default run

@@ -1,7 +1,6 @@
 ---
 - name: "Mac Deployment"
-  hosts: localhost
-  connection: local
+  hosts: all
   become: false
 
   vars:
