@@ -11,7 +11,7 @@
       - sublime-text
       - visual-studio-code
 
-    brew_packages:
+    brew_formulae:
       - ansible-lint
       - neofetch
       - yamllint
@@ -39,9 +39,9 @@
       when: install_brew_casks is defined
       tags: homebrew
 
-    - name: "chrisvanmeer.homebrew : Ensure Homebrew packages are present."
+    - name: "chrisvanmeer.homebrew : Ensure Homebrew formulae are present."
       homebrew:
-        name: "{{ brew_packages }}"
+        name: "{{ brew_formulae }}"
         state: present
       tags: homebrew
 
@@ -72,4 +72,10 @@
       git:
         repo: https://github.com/zsh-users/zsh-autosuggestions.git
         dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+      tags: zsh
+
+    - name: "chrisvanmeer.zsh : Ensure zsh-syntax-highlighting plugin is installed."
+      git:
+        repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+        dest: "~"
       tags: zsh
