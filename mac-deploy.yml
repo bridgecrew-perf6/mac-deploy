@@ -18,6 +18,7 @@
       - vim
       - zsh-autosuggestions
       - zsh-history-substring-search
+      - zsh-syntax-highlighting
 
   roles:
     - role: chrisvanmeer.dotfiles
