@@ -28,7 +28,7 @@
       homebrew_cask:
         name: "{{ brew_casks }}"
         state: present
-      when: brew_casks is defined
+      when: install_brew_casks is defined
 
     - name: "chrisvanmeer.homebrew : Ensure Homebrew packages are present."
       homebrew:
