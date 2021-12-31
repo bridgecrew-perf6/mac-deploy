@@ -21,6 +21,8 @@
       - zsh-syntax-highlighting
 
   roles:
+    - role: geerlingguy.mac.homebrew
+      tags: homebrew
     - role: chrisvanmeer.dotfiles
       tags: dotfiles
     - role: chrisvanmeer.vim
