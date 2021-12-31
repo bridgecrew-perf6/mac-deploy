@@ -25,6 +25,14 @@ ansible-galaxy install -r requirements.yml
 
 ## Run the playbook
 
+#### Default run
+
 ```
 ansible-playbook mac-deploy.yml
+```
+
+#### Cask run (e.g. iterm2, sublime-text)
+
+```
+ansible-playbook mac-deploy.yml --extra-vars "install_brew_casks=true”
 ```

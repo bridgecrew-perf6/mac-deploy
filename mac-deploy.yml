@@ -23,17 +23,25 @@
     - name: "chrisvanmeer.homebrew : Ensure Homebrew is updated."
       homebrew:
         update_homebrew: yes
+      tags: homebrew
 
     - name: "chrisvanmeer.homebrew : Ensure Homebrew casks are poured."
       homebrew_cask:
         name: "{{ brew_casks }}"
         state: present
       when: install_brew_casks is defined
+      tags: homebrew
 
     - name: "chrisvanmeer.homebrew : Ensure Homebrew packages are present."
       homebrew:
         name: "{{ brew_packages }}"
         state: present
+      tags: homebrew
+
+    - name: "chrisvanmeer.zsh : Ensure zsh is the user's shell."
+      shell: chsh -s $(which zsh) {{ lookup('env', 'USER') }}
+      become: true
+      tags: zsh
 
     - name: "chrisvanmeer.zsh : Ensure oh-my-zsh is installed."
       git:
