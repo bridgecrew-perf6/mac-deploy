@@ -1,0 +1,48 @@
+---
+- name: "Mac Deployment"
+  hosts: localhost
+  connection: local
+  become: true
+
+  vars:
+    brew_packages:
+      - ansible-lint
+      - neofetch
+      - yamllint
+      - vim
+      - zsh-autosuggestions
+      - zsh-history-substring-search
+
+  tasks:
+    - name: "chrisvanmeer.homebrew : Ensure Homebrew is updated and casks are poured."
+      homebrew:
+        name: "{{ brew_packages }}"
+        state: present
+        update_homebrew: yes
+
+    - name: "chrisvanmeer.zsh : Ensure oh-my-zsh is installed."
+      git:
+        repo: https://github.com/robbyrussell/oh-my-zsh
+        dest: ~/.oh-my-zsh
+      become: false
+      tags: zsh
+
+    - name: "chrisvanmeer.zsh : Ensure zsh-history-substring-search plugin is installed."
+      git:
+        repo: https://github.com/zsh-users/zsh-history-substring-search
+        dest: ~/.oh-my-zsh/custom/plugins/zsh-history-substring-search
+      become: false
+      tags: zsh
+
+    - name: "chrisvanmeer.zsh : Ensure zsh-autosuggestions plugin is installed."
+      git:
+        repo: https://github.com/zsh-users/zsh-autosuggestions.git
+        dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+      become: false
+      tags: zsh
+
+  roles:
+    - role: chrisvanmeer.dotfiles
+      tags: dotfiles
+    - role: chrisvanmeer.vim
+      tags: vim
