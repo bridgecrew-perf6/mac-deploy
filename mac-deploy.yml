@@ -20,13 +20,17 @@
       - zsh-history-substring-search
 
   tasks:
-    - name: "chrisvanmeer.homebrew : Ensure Homebrew is updated and casks are poured."
+    - name: "chrisvanmeer.homebrew : Ensure Homebrew is updated."
+      homebrew:
+        update_homebrew: yes
+
+    - name: "chrisvanmeer.homebrew : Ensure Homebrew casks are poured."
       homebrew_cask:
         name: "{{ brew_casks }}"
         state: present
-        update_homebrew: yes
+      when: brew_casks is defined
 
-    - name: "chrisvanmeer.homebrew : Ensure Homebrew packages are installed."
+    - name: "chrisvanmeer.homebrew : Ensure Homebrew packages are present."
       homebrew:
         name: "{{ brew_packages }}"
         state: present
