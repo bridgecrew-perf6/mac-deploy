@@ -77,5 +77,5 @@
     - name: "chrisvanmeer.zsh : Ensure zsh-syntax-highlighting plugin is installed."
       git:
         repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
-        dest: "~"
+        dest: "~/zsh-syntax-highlighting"
       tags: zsh
