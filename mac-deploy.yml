@@ -2,7 +2,7 @@
 - name: "Mac Deployment"
   hosts: localhost
   connection: local
-  become: true
+  become: false
 
   vars:
     brew_packages:
@@ -24,21 +24,18 @@
       git:
         repo: https://github.com/robbyrussell/oh-my-zsh
         dest: ~/.oh-my-zsh
-      become: false
       tags: zsh
 
     - name: "chrisvanmeer.zsh : Ensure zsh-history-substring-search plugin is installed."
       git:
         repo: https://github.com/zsh-users/zsh-history-substring-search
         dest: ~/.oh-my-zsh/custom/plugins/zsh-history-substring-search
-      become: false
       tags: zsh
 
     - name: "chrisvanmeer.zsh : Ensure zsh-autosuggestions plugin is installed."
       git:
         repo: https://github.com/zsh-users/zsh-autosuggestions.git
         dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-      become: false
       tags: zsh
 
   roles:
