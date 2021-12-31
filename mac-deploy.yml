@@ -5,6 +5,12 @@
   become: false
 
   vars:
+    brew_casks:
+      - alfred
+      - iterm2
+      - sublime-text
+      - visual-studio-code
+
     brew_packages:
       - ansible-lint
       - neofetch
@@ -15,10 +21,15 @@
 
   tasks:
     - name: "chrisvanmeer.homebrew : Ensure Homebrew is updated and casks are poured."
+      homebrew_cask:
+        name: "{{ brew_casks }}"
+        state: present
+        update_homebrew: yes
+
+    - name: "chrisvanmeer.homebrew : Ensure Homebrew packages are installed."
       homebrew:
         name: "{{ brew_packages }}"
         state: present
-        update_homebrew: yes
 
     - name: "chrisvanmeer.zsh : Ensure oh-my-zsh is installed."
       git:
