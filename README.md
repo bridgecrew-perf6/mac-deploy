@@ -39,6 +39,9 @@ interpreter_python    = auto_silent
 
 ```
 localhost ansible_connection=local
+mac1
+mac2
+mac3
 ```
 
 ## Run the playbook
