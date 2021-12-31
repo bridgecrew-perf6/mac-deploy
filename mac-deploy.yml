@@ -29,10 +29,6 @@
       tags: vim
 
   tasks:
-    - name: "chrisvanmeer.homebrew : Ensure Homebrew is updated."
-      homebrew:
-        update_homebrew: yes
-      tags: homebrew
 
     - name: "chrisvanmeer.homebrew : Ensure Homebrew casks are poured."
       homebrew_cask:
