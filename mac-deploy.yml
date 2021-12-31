@@ -19,6 +19,12 @@
       - zsh-autosuggestions
       - zsh-history-substring-search
 
+  roles:
+    - role: chrisvanmeer.dotfiles
+      tags: dotfiles
+    - role: chrisvanmeer.vim
+      tags: vim
+
   tasks:
     - name: "chrisvanmeer.homebrew : Ensure Homebrew is updated."
       homebrew:
@@ -66,9 +72,3 @@
         repo: https://github.com/zsh-users/zsh-autosuggestions.git
         dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
       tags: zsh
-
-  roles:
-    - role: chrisvanmeer.dotfiles
-      tags: dotfiles
-    - role: chrisvanmeer.vim
-      tags: vim
