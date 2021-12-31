@@ -6,14 +6,23 @@
   vars:
     brew_casks:
       - alfred
+      - bartender
       - iterm2
+      - sequel-ace
       - sublime-text
+      - transmit
       - visual-studio-code
 
     brew_formulae:
       - ansible-lint
+      - git
+      - iperf
       - neofetch
+      - nmap
+      - tmux
+      - tree
       - yamllint
+      - wget
       - vim
       - zsh-autosuggestions
       - zsh-history-substring-search
