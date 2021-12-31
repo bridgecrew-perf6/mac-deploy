@@ -38,9 +38,15 @@
         state: present
       tags: homebrew
 
-    - name: "chrisvanmeer.zsh : Ensure zsh is the user's shell."
+    - name: "chrisvanmeer.zsh : Retrieve current user's shell."
+      set_fact:
+        current_user_shell: "{{ ansible_user_shell }}"
+      tags: zsh
+
+    - name: "chrisvanmeer.zsh : Ensure zsh is set as shell if current shell is not already zsh."
       shell: chsh -s $(which zsh) {{ lookup('env', 'USER') }}
       become: true
+      when: current_user_shell != "/bin/zsh"
       tags: zsh
 
     - name: "chrisvanmeer.zsh : Ensure oh-my-zsh is installed."
