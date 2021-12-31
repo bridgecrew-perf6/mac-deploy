@@ -3,7 +3,7 @@
 Install for my personal macOS systems.
 Make sure you have at least 10Gb of free diskspace.
 
-## Install Homebrew and install Ansible
+## Install Homebrew and install Ansible (on control host)
 
 ```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
