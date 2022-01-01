@@ -1,7 +1,6 @@
 ---
 roles:
   - name: chrisvanmeer.dotfiles
-  - name: chrisvanmeer.vim
 
 collections:
   - name: geerlingguy.mac

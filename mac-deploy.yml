@@ -4,6 +4,9 @@
   become: false
 
   vars:
+
+    home_path: "~"
+
     brew_casks:
       - alfred
       - bartender
@@ -33,11 +36,8 @@
       tags: homebrew
     - role: chrisvanmeer.dotfiles
       tags: dotfiles
-    - role: chrisvanmeer.vim
-      tags: vim
 
   tasks:
-
     - name: "chrisvanmeer.homebrew : Ensure Homebrew casks are poured."
       homebrew_cask:
         name: "{{ brew_casks }}"
@@ -65,23 +65,44 @@
     - name: "chrisvanmeer.zsh : Ensure oh-my-zsh is installed."
       git:
         repo: https://github.com/robbyrussell/oh-my-zsh
-        dest: ~/.oh-my-zsh
+        dest: "{{ home_path }}/.oh-my-zsh"
       tags: zsh
 
     - name: "chrisvanmeer.zsh : Ensure zsh-history-substring-search plugin is installed."
       git:
         repo: https://github.com/zsh-users/zsh-history-substring-search
-        dest: ~/.oh-my-zsh/custom/plugins/zsh-history-substring-search
+        dest: "{{ home_path }}/.oh-my-zsh/custom/plugins/zsh-history-substring-search"
       tags: zsh
 
     - name: "chrisvanmeer.zsh : Ensure zsh-autosuggestions plugin is installed."
       git:
         repo: https://github.com/zsh-users/zsh-autosuggestions.git
-        dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+        dest: "{{ home_path }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
       tags: zsh
 
     - name: "chrisvanmeer.zsh : Ensure zsh-syntax-highlighting plugin is installed."
       git:
         repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
-        dest: "~/zsh-syntax-highlighting"
+        dest: "{{ home_path }}/zsh-syntax-highlighting"
       tags: zsh
+
+    - name: "Check if indentLine plugin is installed."
+      stat:
+        path: "{{ home_path }}/.vim/pack/vendor/start/indentLine"
+      become: false
+      register: identline
+      tags: vim
+
+    - name: "Clone indentLine repo if identLine is not installed."
+      git:
+        repo: https://github.com/Yggdroot/indentLine.git
+        dest: "{{ home_path }}/.vim/pack/vendor/start/indentLine"
+      become: false
+      when: not identline.stat.exists
+      tags: vim
+
+    - name: "Register identLine plugin if identLine is not installed."
+      command: 'vim -u NONE -c "helptags {{ home_path }}/.vim/pack/vendor/start/indentLine/doc" -c "q"'
+      become: false
+      when: not identline.stat.exists
+      tags: vim
