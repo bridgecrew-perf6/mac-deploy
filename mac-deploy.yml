@@ -107,17 +107,23 @@
       when: not identline.stat.exists
       tags: vim
 
-    - name: "chrisvanmeer.yaml : Ensure yamllint configuration-file is in place."
+    - name: "chrisvanmeer.yaml : Ensure yamllint configuration directory is in place."
       file:
-        path: "{{ home_path }}/.config/yamllint/config"
-        state: touch
+        path: "{{ home_path }}/.config/yamllint"
+        state: directory
       become: false
-      register: yamllint_file
       tags: yaml
+
+    # - name: "chrisvanmeer.yaml : Ensure yamllint configuration-file is in place."
+    #   file:
+    #     path: "{{ home_path }}/.config/yamllint/config"
+    #     state: touch
+    #   become: false
+    #   tags: yaml
 
     - name: "chrisvanmeer.yaml : Ensure yamllint configuration is in place."
       copy:
-        dest: "{{ yamllint_file }}"
+        dest: "{{ home_path }}/.config/yamllint/config"
         content: |
           extends: relaxed
           rules:
