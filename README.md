@@ -44,6 +44,14 @@ mac2
 mac3
 ```
 
+## Variables
+
+| Variable Name | Default Value | Description                                                                                                       |
+| ------------- | ------------- | ----------------------------------------------------------------------------------------------------------------- |
+| home_path     | `~`           | Change this if you want this in another directory.                                                                |
+| brew_casks    | See playbook  | Adjust this to your needs, default playbook run skips this. Use the `--extra-vars` parameter (see example below). |
+| brew_formulae | See playbook  | Adjust this to your needs.                                                                                        |
+
 ## Run the playbook
 
 #### Default run
