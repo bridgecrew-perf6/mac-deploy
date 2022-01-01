@@ -114,13 +114,6 @@
       become: false
       tags: yaml
 
-    # - name: "chrisvanmeer.yaml : Ensure yamllint configuration-file is in place."
-    #   file:
-    #     path: "{{ home_path }}/.config/yamllint/config"
-    #     state: touch
-    #   become: false
-    #   tags: yaml
-
     - name: "chrisvanmeer.yaml : Ensure yamllint configuration is in place."
       copy:
         dest: "{{ home_path }}/.config/yamllint/config"
