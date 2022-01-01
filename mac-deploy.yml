@@ -24,9 +24,9 @@
       - nmap
       - tmux
       - tree
-      - yamllint
       - wget
       - vim
+      - yamllint
       - zsh-autosuggestions
       - zsh-history-substring-search
       - zsh-syntax-highlighting
@@ -86,14 +86,14 @@
         dest: "{{ home_path }}/zsh-syntax-highlighting"
       tags: zsh
 
-    - name: "Check if indentLine plugin is installed."
+    - name: "chrisvanmeer.vim : Check if indentLine plugin is installed."
       stat:
         path: "{{ home_path }}/.vim/pack/vendor/start/indentLine"
       become: false
       register: identline
       tags: vim
 
-    - name: "Clone indentLine repo if identLine is not installed."
+    - name: "chrisvanmeer.vim : Clone indentLine repo if identLine is not installed."
       git:
         repo: https://github.com/Yggdroot/indentLine.git
         dest: "{{ home_path }}/.vim/pack/vendor/start/indentLine"
@@ -101,8 +101,26 @@
       when: not identline.stat.exists
       tags: vim
 
-    - name: "Register identLine plugin if identLine is not installed."
+    - name: "chrisvanmeer.vim : Register identLine plugin if identLine is not installed."
       command: 'vim -u NONE -c "helptags {{ home_path }}/.vim/pack/vendor/start/indentLine/doc" -c "q"'
       become: false
       when: not identline.stat.exists
       tags: vim
+
+    - name: "chrisvanmeer.yaml : Ensure yamllint configuration-file is in place."
+      file:
+        path: "{{ home_path }}/.config/yamllint/config"
+        state: touch
+      become: false
+      register: yamllint_file
+      tags: yaml
+
+    - name: "chrisvanmeer.yaml : Ensure yamllint configuration is in place."
+      copy:
+        dest: "{{ yamllint_file }}"
+        content: |
+          extends: relaxed
+          rules:
+            line-length: disable
+      become: false
+      tags: yaml
